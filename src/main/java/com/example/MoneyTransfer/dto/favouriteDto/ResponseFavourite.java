@@ -1,0 +1,15 @@
+package com.example.MoneyTransfer.dto.favouriteDto;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+@Data
+public class ResponseFavourite {
+
+
+    @NotNull
+    private String accountNumber;
+
+    @NotNull
+    private String recipientName;
+}
