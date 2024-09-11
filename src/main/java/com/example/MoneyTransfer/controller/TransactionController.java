@@ -14,13 +14,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
+
 @RequestMapping("/api/transactions")
-
-
 @Tag(name = "Transaction Controller", description = "Transaction Controller")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins = "*")
 public class TransactionController {
 
     private final ITransaction transactionService;

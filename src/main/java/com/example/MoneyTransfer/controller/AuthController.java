@@ -32,10 +32,10 @@ import java.util.Map;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins = "*")
 @Tag(name = "Customer Auth Controller", description = "Customer Auth controller")
 public class AuthController {
 

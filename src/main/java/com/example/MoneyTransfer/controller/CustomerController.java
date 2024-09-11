@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/customer")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins = "*")
 @Tag(name = "Customer Controller", description = "Customer controller")
 public class CustomerController {
 
@@ -40,7 +40,7 @@ private  final ICustomerService customerService;
         return this.customerService.getCustomerById(Math.toIntExact(customerId));
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @Operation(summary = "Get customer by email")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = CustomerDto.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})

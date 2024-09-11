@@ -25,10 +25,10 @@ import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/favourites")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins = "*")
 @Tag(name = "Favourite Controller ", description = "Favourite Controller ")
 
 public class FavouriteController {

@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.security.auth.login.AccountNotFoundException;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/account")
 @RequiredArgsConstructor
 @Validated
-@CrossOrigin(origins = "*")
 public class AccountController {
 
 
