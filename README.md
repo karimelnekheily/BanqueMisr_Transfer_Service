@@ -1,3 +1,5 @@
+![Banque Misr Logo](image)(https://github.com/user-attachments/assets/af879f41-9e4e-4bb6-b51c-03267fa18ca3)
+)
 # User Account Management API
 
 This project provides a backend API for user account management, session tracking, and financial transactions. It allows users to create accounts, authenticate, manage their balances, and perform money transfers.
