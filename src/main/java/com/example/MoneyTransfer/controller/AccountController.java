@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.security.auth.login.AccountNotFoundException;
 
 @RestController
