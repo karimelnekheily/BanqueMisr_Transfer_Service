@@ -1,4 +1,5 @@
-![Banque Misr Logo](https://github.com/user-attachments/assets/cfbe5af2-0dba-460a-8d82-d73d7d72c971)
+![Banque Misr Logo](https://github.com/user-attachments/assets/37e80cf8-9f4d-423d-9079-6069d3d132b6)
+
 
 # User Account Management API
 
