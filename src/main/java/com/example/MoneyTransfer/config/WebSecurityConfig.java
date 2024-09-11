@@ -42,9 +42,8 @@ public class WebSecurityConfig {
                 .exceptionHandling(e -> e.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("swagger-ui.html",
-                                "/api/auth/", "/swagger-ui/", "/h2-console/",
-                                "/v3/api-docs/", "/swagger-resources/", "/actuator/").
-                        permitAll().anyRequest().authenticated());
+                                "/api/auth/**", "/api/auth/login","/swagger-ui/", "/h2-console/",
+                                "/v3/api-docs/", "/swagger-resources/", "/actuator/").permitAll().anyRequest().authenticated());
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
