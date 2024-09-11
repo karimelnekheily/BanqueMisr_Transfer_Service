@@ -46,6 +46,8 @@ public class AuthService implements IAuthService {
 
 
 
+
+
     @Override
     @Transactional(isolation = Isolation.SERIALIZABLE)
 
@@ -98,11 +100,21 @@ public class AuthService implements IAuthService {
 
         String jwt = jwtUtils.generateJwtToken(authentication);
 
+
+        Customer customer =customerRepository.findCustomerByEmail(loginRequestDTO.getEmail())
+                .orElseThrow(()-> new CustomerNotFoundException("Customer not found"+loginRequestDTO.getEmail()));
+
+        Double balance =customer.getAccounts().stream().findFirst().map(Account::getBalance).orElse(0.0);
+
         return LoginResponseDTO.builder()
                 .token(jwt)
                 .message("Login Successful")
                 .status(HttpStatus.ACCEPTED)
                 .tokenType("Bearer")
+                .customerId(Math.toIntExact(customer.getId()))
+                .name(customer.getName())
+                .email(customer.getEmail())
+                .balance(balance)
                 .build();
     }
     @Override
