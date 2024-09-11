@@ -105,6 +105,36 @@ public class AuthService implements IAuthService {
                 .tokenType("Bearer")
                 .build();
     }
+    @Override
+    @Transactional
+    public void updatePassword( String oldPassword, String newPassword) throws     CustomerNotFoundException {
+        // Validate password strength (optional)
+        //validatePasswordStrength(newPassword);
+
+
+      String email=SecurityContextHolder.getContext().getAuthentication().getName();
+         Customer customer = customerRepository.findCustomerByEmail(email)
+              .orElseThrow(() -> new CustomerNotFoundException(String.format("Customer with email %s not found", email)));
+
+        if (!passwordEncoder.matches(oldPassword, customer.getPassword())) {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+
+        if (passwordEncoder.matches(newPassword, customer.getPassword())) {
+            throw new IllegalArgumentException("New password cannot be the same as the old password");
+        }
+
+        customer.setPassword(passwordEncoder.encode(newPassword));
+        customerRepository.save(customer);
+    }
+
+    private void validatePasswordStrength(String password) {
+        // Example password strength validation
+        if (password.length() < 6) {
+            throw new IllegalArgumentException("Password must be at least 8 characters long");
+        }
+        // Add more validations as needed (e.g., uppercase, numbers, special characters)
+    }
 
     @Override
     public void logout(String token) throws CustomerNotFoundException {

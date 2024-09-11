@@ -5,16 +5,20 @@ import com.example.MoneyTransfer.dto.accountDto.AccountDto;
 import com.example.MoneyTransfer.dto.accountDto.CreateAccountDto;
 import com.example.MoneyTransfer.exception.custom.CustomerNotFoundException;
 import com.example.MoneyTransfer.exception.response.ErrorDetails;
+import com.example.MoneyTransfer.security.JwtUtils;
 import com.example.MoneyTransfer.service.impl.AccountService;
+import com.example.MoneyTransfer.service.impl.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.security.auth.login.AccountNotFoundException;
 
@@ -27,6 +31,7 @@ public class AccountController {
 
 
     private final AccountService accountService;
+
 
 
     @Operation(summary = "Create new Sub Account for current customer")
@@ -49,5 +54,8 @@ public class AccountController {
         Double balance = accountService.getBalance(accountNumber);
         return ResponseEntity.ok(balance);
     }
+
+
+
 
 }

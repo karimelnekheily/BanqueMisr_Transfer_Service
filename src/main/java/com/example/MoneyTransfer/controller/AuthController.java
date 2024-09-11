@@ -1,6 +1,7 @@
 package com.example.MoneyTransfer.controller;
 
 import com.example.MoneyTransfer.dto.CustomerDto.CustomerDto;
+import com.example.MoneyTransfer.dto.UpdatePasswordDTO;
 import com.example.MoneyTransfer.dto.authDto.LoginRequestDTO;
 import com.example.MoneyTransfer.dto.authDto.LoginResponseDTO;
 import com.example.MoneyTransfer.dto.authDto.RegisterCustomerRequest;
@@ -8,6 +9,7 @@ import com.example.MoneyTransfer.dto.authDto.RegisterCustomerResponse;
 import com.example.MoneyTransfer.exception.custom.CustomerAlreadyExistsException;
 import com.example.MoneyTransfer.exception.custom.CustomerNotFoundException;
 import com.example.MoneyTransfer.exception.response.ErrorDetails;
+import com.example.MoneyTransfer.security.JwtUtils;
 import com.example.MoneyTransfer.security.TokenBlacklistService;
 import com.example.MoneyTransfer.service.IAuthService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,4 +92,23 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-}
+    @Operation(summary = "Update Customer Password")
+    @ApiResponse(responseCode = "200", description = "Password updated successfully",
+            content = {@Content(schema = @Schema(type = "string"), mediaType = "application/json")})
+    @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
+    @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
+    @PutMapping("/updatePassword")
+    public ResponseEntity<String> updatePassword(@RequestBody @Valid UpdatePasswordDTO updatePasswordDTO) {
+
+        try {
+                authService.updatePassword(updatePasswordDTO.getOldPassword(), updatePasswordDTO.getNewPassword());
+                return ResponseEntity.ok("Password updated successfully");
+            } catch (IllegalArgumentException e) {
+                return new ResponseEntity<>("Old password is incorrect", HttpStatus.BAD_REQUEST);
+            } catch (CustomerNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
