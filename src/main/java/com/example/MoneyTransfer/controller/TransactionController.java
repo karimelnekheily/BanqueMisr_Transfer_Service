@@ -25,7 +25,7 @@ public class TransactionController {
 
     private final ITransaction transactionService;
 
-
+    @CrossOrigin
     @Operation(summary = "get the transactions history of the logged in customer ")
     @GetMapping("/history")
     public ResponseEntity<AllTransactions> getTransactionHistory(

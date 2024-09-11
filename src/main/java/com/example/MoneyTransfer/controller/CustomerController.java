@@ -31,7 +31,7 @@ import java.util.List;
 public class CustomerController {
 
 private  final ICustomerService customerService;
-
+    @CrossOrigin
     @Operation(summary = "Get customer by id")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = CustomerDto.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
@@ -40,7 +40,7 @@ private  final ICustomerService customerService;
         return this.customerService.getCustomerById(Math.toIntExact(customerId));
     }
 
-
+    @CrossOrigin
     @Operation(summary = "Get customer by email")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = CustomerDto.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
@@ -51,7 +51,7 @@ private  final ICustomerService customerService;
         return ResponseEntity.ok(customerDto);
     }
 
-
+    @CrossOrigin
     @Operation(summary = "Get all customers")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = CustomerDto.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
@@ -59,7 +59,7 @@ private  final ICustomerService customerService;
     public List<CustomerDto> getAllCustomers()  {
         return this.customerService.getAllCustomers();
     }
-
+    @CrossOrigin
     @Operation(summary = "Update customer by email")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = UpdateCustomerResponse.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
@@ -70,7 +70,7 @@ private  final ICustomerService customerService;
         return this.customerService.updateCustomer(email,updateCustomerRequest);
     }
 
-
+    @CrossOrigin
     @Operation(summary = "Get the last customer added")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = LastCustomerDto.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
@@ -79,7 +79,7 @@ private  final ICustomerService customerService;
         LastCustomerDto lastCustomer = customerService.getLastCustomerAdded();
         return new ResponseEntity<>(lastCustomer, HttpStatus.OK);
     }
-
+    @CrossOrigin
     @Operation(summary = "Delete the current customer")
     @ApiResponse(responseCode = "200", description = "Customer successfully deleted")
      @ApiResponse(responseCode = "404", description = "Customer not found", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})

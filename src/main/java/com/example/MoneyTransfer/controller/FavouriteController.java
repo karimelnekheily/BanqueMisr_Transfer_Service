@@ -77,7 +77,7 @@ public class FavouriteController {
     @ApiResponse(responseCode = "401", description = "Unauthorized", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "404", description = "FavouriteNotFoundException", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin
     public ResponseEntity<Void> deleteFavourite(@PathVariable Long id) {
         try {
             favouriteService.deleteFavouriteById(id);

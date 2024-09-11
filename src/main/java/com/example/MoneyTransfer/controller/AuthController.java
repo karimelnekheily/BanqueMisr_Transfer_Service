@@ -44,7 +44,7 @@ public class AuthController {
 
     private  final TokenBlacklistService tokenBlacklistService;
 
-
+    @CrossOrigin
     @PostMapping("/register")
     @Operation(summary = "Account Creation")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = RegisterCustomerResponse.class), mediaType = "application/json")})
@@ -53,7 +53,7 @@ public class AuthController {
 
         return this.authService.register(customer);
     }
-
+    @CrossOrigin
     @Operation(summary = "Login and generate JWT")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = LoginResponseDTO.class), mediaType = "application/json")})
     @ApiResponse(responseCode = "401", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")})
@@ -63,7 +63,7 @@ public class AuthController {
     }
 
 
-
+    @CrossOrigin
     @PostMapping("/logout")
     @Operation(summary = "user logout")
     @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = CustomerDto.class), mediaType = "application/json")})
@@ -91,7 +91,7 @@ public class AuthController {
         response.put("message", "Logout successful");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+    @CrossOrigin
     @Operation(summary = "Update Customer Password")
     @ApiResponse(responseCode = "200", description = "Password updated successfully",
             content = {@Content(schema = @Schema(type = "string"), mediaType = "application/json")})

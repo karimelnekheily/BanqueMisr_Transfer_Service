@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class TransferController{
 
     private final TransferService transferService;
-
+    @CrossOrigin
     @Operation(summary = "transfer money by account number ")
 
     @PostMapping("/account")
